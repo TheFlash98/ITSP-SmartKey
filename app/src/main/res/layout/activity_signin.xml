@@ -7,7 +7,8 @@
     <TextView android:text = "LOGIN" android:layout_width="wrap_content"
         android:layout_height = "wrap_content"
         android:id = "@+id/textview"
-        android:textSize = "35dp"
+        android:paddingTop="16dp"
+        android:textSize="32sp"
         android:layout_alignParentTop = "true"
         android:layout_centerHorizontal = "true" />
 
@@ -17,7 +18,7 @@
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:id = "@+id/editText"
-        android:hint = "Enter Name"
+        android:hint = "@string/enter_name"
         android:focusable = "true"
         android:textColorHighlight = "#ff7eff15"
         android:textColorHint = "#ffff25e6"
