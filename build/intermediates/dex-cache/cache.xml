@@ -3,12 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="/Users/Sarthak/.android/build-cache/5ef5357a9f197ee768126a748b50544443117c84/output/jars/classes.jar"
+        jar="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6dd10ce5bfc0bb2a30c11ac1361bf388414c6d64/classes.dex" />
+        sha1="409f05bb2205bcad6db273523e56b7559e0313d5">
+        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7da76dc8006c76ff3276f51a9e3af38d63a2e700/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -18,114 +18,6 @@
         revision="25.0.3"
         sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
         <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_23f2da962ebf043ed498220f7d5aa485300b0d59/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/.android/build-cache/827dd0f96b9869713bb4659283944d635f986fc5/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_166962193bd90526ac72976a89b5ad82b4137659/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.2_ef4b33c183ba3364767bf76a43f32bc0c2987e9d/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/.android/build-cache/cfc016380df56ca64686b0193099aaf3e89b1a2c/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_da1b0d007d8ebbbedd7b58f1c9b7557d6b089466/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/.android/build-cache/e0d7f8e05c6b8823a2643a4d4d99a313a4c84ee9/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0e53b8b83e018a9f10d66127613d80c17fc81084/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.3.1_78577d3715f1abea60decd383d3d9cbc13c3dc47/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="bce54e7360d15f1f4ad9e32b96b9c5b5191b8be7">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7da76dc8006c76ff3276f51a9e3af38d63a2e700/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/.android/build-cache/5f03a629392ae5305f47c806c4cab5526242029c/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9232d05bbe5925a93a281669e9d260a9f1841281/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/.android/build-cache/2e2c8749dc4e14bd1607874e4381e94bdd2e4358/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_73ba94935808640d114e6660eee14a18cac683bd/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/.android/build-cache/fa77eb1bc56e92e575898db580b33e6878ae98a3/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3ba83d2c5f08b94233a91527add294a20b41e9b5/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/.android/build-cache/e39490cfecc88fd0e546d22b10f167d0d7fd3630/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_49d479517e52b9b9d2a21866a8fc9e90ec6a3009/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/.android/build-cache/50705a609e3e9373939b9f86bd1d836a142056ca/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_da6014ed02209c3b50c0810d00a4425583e53ef7/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/.android/build-cache/fb09bd2f5631056daa78a2d50c9a7518946bb5fd/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4ebdfb8dc5532ba651d336d349b630a5a9bbbf52/classes.dex" />
     </item>
 
 </items>
