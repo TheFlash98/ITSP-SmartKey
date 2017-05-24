@@ -1,20 +1,30 @@
 package com.example.ankitbohra.smartkey;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
+import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class signin extends AppCompatActivity {
     Button b1,b2;
     EditText ed1,ed2;
+    String username,password;
+    CheckBox saveLoginCheckBox;
+    SharedPreferences loginPreferences;
+    SharedPreferences.Editor loginPrefsEditor;
+    Boolean saveLogin;
 
     TextView tx1;
     int counter = 3;
@@ -62,5 +72,20 @@ public class signin extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    public void onClick(View view) {
+        username = ed1.getText().toString();
+        password = ed2.getText().toString();
+
+        if (saveLoginCheckBox.isChecked()) {
+            loginPrefsEditor.putBoolean("saveLogin", true);
+            loginPrefsEditor.putString("username", username);
+            loginPrefsEditor.putString("password", password);
+            loginPrefsEditor.commit();
+        } else {
+            loginPrefsEditor.clear();
+            loginPrefsEditor.commit();
+        }
+
     }
 }
