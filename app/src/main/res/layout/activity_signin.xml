@@ -44,14 +44,6 @@
         android:textColorHint="#ffff299f"
         android:hint="Password" />
 
-    <CheckBox
-        android:id="@+id/saveLoginCheckBox"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/editText2"
-        android:text="Save Login?"
-        />
 
 
     <TextView
@@ -60,7 +52,7 @@
         android:text=" "
         android:id="@+id/textView2"
         android:textSize="25dp"
-        android:layout_below="@+id/saveLoginCheckBox"
+        android:layout_below="@+id/editText2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp" />

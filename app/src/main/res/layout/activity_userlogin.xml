@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ankitbohra.smartkey.userlogin">
+
+<LinearLayout
+    android:layout_width="368dp"
+    android:layout_height="495dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="User Login"
+        android:textAllCaps="true"
+        android:textSize="50sp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"/>
+
+    <Button
+        android:id="@+id/open"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Open"
+        android:layout_marginTop="60dp"
+        android:textStyle="bold"
+        android:onClick="openlock"
+        />
+
+    <Button
+        android:id="@+id/close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CLose"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:onClick="closelock"
+        />
+
+
+</LinearLayout>
+</android.support.constraint.ConstraintLayout>
