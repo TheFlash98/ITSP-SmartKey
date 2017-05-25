@@ -1,21 +1,28 @@
 package com.example.ankitbohra.smartkey;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class signin extends AppCompatActivity {
     Button b1,b2;
@@ -29,10 +36,16 @@ public class signin extends AppCompatActivity {
     TextView tx1;
     int counter = 3;
 
+    private static final String url = "http://192.168.1.4:5000/login";
+    private final OkHttpClient client = new OkHttpClient();
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         b1 = (Button)findViewById(R.id.button);
         ed1 = (EditText)findViewById(R.id.editText);
@@ -42,50 +55,79 @@ public class signin extends AppCompatActivity {
         tx1 = (TextView)findViewById(R.id.textView3);
         tx1.setVisibility(View.GONE);
 
-        b1.setOnClickListener(new View.OnClickListener() {
+
+    }
+
+
+    public void action(View view){
+        EditText enterName = (EditText)findViewById(R.id.editText);
+        EditText enterPassword = (EditText)findViewById(R.id.editText2);
+
+        String username = enterName.getText().toString();
+        String password = enterPassword.getText().toString();
+
+        String json = jsonMaker(username,password);
+
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new com.squareup.okhttp.Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onClick(View v) {
-                if(ed1.getText().toString().equals("admin") &&
-                        ed2.getText().toString().equals("admin")) {
-                    Toast.makeText(getApplicationContext(),
-                            "Redirecting...",Toast.LENGTH_SHORT).show();
-                    Intent back = new Intent(signin.this , SMARTKEYitsp.class);
-                    startActivity(back);
-                }else{
-                    Toast.makeText(getApplicationContext(), "Wrong Credentials",Toast.LENGTH_SHORT).show();
-
-                    tx1.setVisibility(View.VISIBLE);
-                    tx1.setBackgroundColor(Color.RED);
-                    counter--;
-                    tx1.setText(Integer.toString(counter));
-
-                    if (counter == 0) {
-                        b1.setEnabled(false);
-                    }
-                }
+            public void onFailure(com.squareup.okhttp.Request request, IOException throwable) {
+                throwable.printStackTrace();
             }
-        });
 
-        b2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public void onResponse(Response response) throws IOException{
+                if (!response.isSuccessful())
+                    throw new IOException("Unexpected code " + response);
+                //TextView textView = (TextView)findViewById(R.id.demo);
+                //Log.d("Random",response.body().string());
+                String reply = response.body().toString();
+                //Log.d("Random",reply);
+                try {
+                    //JSONObject object = (JSONObject) new JSONTokener(response.body().string()).nextValue();
+                    //String query = object.getString("results");
+                    if(response.code()==200){
+                        Log.d("Random","Bingo!");
+                    }
+                    String query ="";
+                    JSONObject jsonRootObject = new JSONObject(response.body().string());
+                    JSONArray jsonArray = jsonRootObject.optJSONArray("results");
+                    for(int i=0; i < jsonArray.length(); i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        query = jsonObject.optString("parameters").toString();
+                    }
+                    Log.d("Random","DoneTillHere");
+                    //String s = (String)reader.nextValue();
+                    Log.d("Random",query);
+                    if(query.equals("Grant Access")){
+                        Intent intent = new Intent(signin.this,LoggedIn.class);
+                        startActivity(intent);
+                    }
+
+                    //JSONObject sys = reader.getJSONObject("results");
+                    //String parameters = sys.getString("parameters");
+                    //Log.d("Random",parameters);
+                }
+                catch (org.json.JSONException e){
+                    Log.d("Random",e.getMessage());
+                }
+
+
+                //Intent intent = new Intent(signin.this , LoggedIn.class);
+                //startActivity(intent);
             }
         });
     }
-    public void onClick(View view) {
-        username = ed1.getText().toString();
-        password = ed2.getText().toString();
 
-        if (saveLoginCheckBox.isChecked()) {
-            loginPrefsEditor.putBoolean("saveLogin", true);
-            loginPrefsEditor.putString("username", username);
-            loginPrefsEditor.putString("password", password);
-            loginPrefsEditor.commit();
-        } else {
-            loginPrefsEditor.clear();
-            loginPrefsEditor.commit();
-        }
-
+    String jsonMaker(String username, String password){
+        String json = "{\"username\":"+"\""+username+"\","
+                       +"\"password\":"+"\""+password+"\""
+                       +"}" ;
+        return json;
     }
 }

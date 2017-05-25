@@ -1,5 +1,6 @@
 package com.example.ankitbohra.smartkey;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -71,6 +72,9 @@ public class SignUpActivity extends AppCompatActivity {
 
                 }
             });
+
+            Intent intent = new Intent(SignUpActivity.this , LoggedIn.class);
+            startActivity(intent);
         }
         else {
             warning.setText("Passwords don't match. Recheck!");
