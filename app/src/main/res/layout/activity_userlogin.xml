@@ -9,7 +9,9 @@
 <LinearLayout
     android:layout_width="368dp"
     android:layout_height="495dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,27 +20,44 @@
         android:textAllCaps="true"
         android:textSize="50sp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:paddingBottom="20dp"/>
 
     <Button
         android:id="@+id/open"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50sp"
         android:text="Open"
-        android:layout_marginTop="60dp"
         android:textStyle="bold"
+<<<<<<< HEAD
         android:onClick="lock"
+||||||| merged common ancestors
+        android:onClick="openlock"
+=======
+        android:onClick="openlock"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+>>>>>>> 26231eaa031b1ca6d4b0bd0f86b46f6d5bc18a74
         />
 
     <Button
         android:id="@+id/close"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50sp"
         android:text="CLose"
-        android:layout_marginTop="10dp"
         android:textStyle="bold"
+<<<<<<< HEAD
         android:onClick="lock"
         />
+||||||| merged common ancestors
+        android:onClick="closelock"
+        />
+=======
+        android:onClick="closelock"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_marginTop="20dp"/>
+>>>>>>> 26231eaa031b1ca6d4b0bd0f86b46f6d5bc18a74
 
 
 </LinearLayout>
