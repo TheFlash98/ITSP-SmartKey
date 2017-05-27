@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Welcome!"
+        android:textAllCaps="true"
         android:textAlignment="center"
         android:paddingTop="16dp"
         android:textSize="32sp"/>
@@ -19,14 +20,14 @@
         android:hint = "@string/enter_name"
         android:focusable = "true"
         android:textColorHighlight = "#ff7eff15"
-        android:layout_marginTop = "8dp" />
+        android:paddingTop="20dp" />
 
     <EditText
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
+        android:paddingTop="20dp"
         android:id = "@+id/password"
         android:hint="Enter Password"
-        android:layout_marginTop = "8dp"
         android:inputType="textPassword"/>
 
     <EditText
@@ -34,15 +35,18 @@
         android:layout_height = "wrap_content"
         android:id = "@+id/confirm_password"
         android:hint="Confirm Password"
-        android:layout_marginTop = "8dp"
+        android:paddingTop="20dp"
         android:inputType="textPassword"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:text="Sign up"
-        android:onClick="action"/>
+        android:onClick="action"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        />
 
     <TextView
         android:id="@+id/warning"

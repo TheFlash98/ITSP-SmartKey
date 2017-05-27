@@ -21,30 +21,46 @@
         android:layout_height="wrap_content"
         android:text="Admin Login"
         android:textSize="50sp"
-        android:layout_marginLeft="27dp"
-        android:layout_marginTop="15dp"
         android:textAllCaps="true"
-       />
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:paddingBottom="20dp"
+        android:layout_gravity="center"/>
 
-    <Button
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_weight="1"
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="8dp">
+
+
+        <Button
         android:id="@+id/open"
-        android:layout_width="match_parent"
+        android:layout_width="0sp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Open"
-        android:layout_marginTop="60dp"
         android:textStyle="bold"
         android:onClick="openlock"
         />
 
-    <Button
+        <Button
         android:id="@+id/close"
-        android:layout_width="match_parent"
+        android:layout_width="0sp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="CLose"
-        android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:onClick="closelock"
         />
+
+</LinearLayout>
+
+
+
 
     <EditText
         android:layout_width="match_parent"
@@ -52,28 +68,77 @@
         android:hint="ADD USER"
         android:ems="10"
         android:id="@+id/adduser"
-        android:layout_marginTop="50dp"
         android:textColorHint="#ffff299f"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp"
         />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    tools:layout_editor_absoluteY="0dp"
+    tools:layout_editor_absoluteX="8dp">
     <Button
         android:id="@+id/insert"
-        android:layout_width="match_parent"
+        android:layout_width="88dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Insert"
-        android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:onClick="insertuser"
-        />
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
 
     <Button
         android:id="@+id/delete"
-        android:layout_width="match_parent"
+        android:layout_width="88dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:text="Delete"
-        android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:onClick="deleteuser"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
+</LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ADD ADMIN"
+        android:ems="10"
+        android:id="@+id/addadmin"
         />
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1">
+    <Button
+        android:id="@+id/insertadmin"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Insert"
+        android:textStyle="bold"
+        android:onClick="insertuser"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
+
+    <Button
+        android:id="@+id/deleteadmin"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Delete"
+        android:textStyle="bold"
+        android:onClick="deleteuser"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="8dp" />
+
+
+</LinearLayout>
 
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>
