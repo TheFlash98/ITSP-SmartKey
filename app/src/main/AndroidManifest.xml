@@ -23,7 +23,12 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoggedIn" />
         <activity android:name=".userlogin" />
-        <activity android:name=".LockOpen"></activity>
+        <activity android:name=".LockOpen" />
+        <activity android:name=".addadmin" />
+        <activity android:name=".addtemp" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Main2Activity" />
+        <activity android:name=".Datepicker"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ankitbohra.smartkey.addtemp">
+
+
+<LinearLayout
+    android:layout_width="368dp"
+    android:layout_height="495dp"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteY="8dp"
+    tools:layout_editor_absoluteX="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="add temporary user"
+        android:textAllCaps="true"
+        android:textSize="35dp"
+        android:paddingBottom="30dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Add Username"
+        android:ems="10"/>
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/starttime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="start time"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:onClick="starttime"
+        />
+    <Button
+        android:id="@+id/endtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="End time"
+        android:onClick="endtime"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        />
+</LinearLayout>
+
+    <Button
+        android:id="@+id/tempuseradd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="submit"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold"
+        android:onClick="tempuseradd"/>
+
+</LinearLayout>
+</android.support.constraint.ConstraintLayout>
