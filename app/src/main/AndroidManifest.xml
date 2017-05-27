@@ -3,6 +3,7 @@
     package="com.example.ankitbohra.smartkey">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -21,7 +22,8 @@
         <activity android:name=".signin" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoggedIn" />
-        <activity android:name=".userlogin"></activity>
+        <activity android:name=".userlogin" />
+        <activity android:name=".LockOpen"></activity>
     </application>
 
 </manifest>
