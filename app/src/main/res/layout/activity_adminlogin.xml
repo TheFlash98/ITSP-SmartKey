@@ -64,19 +64,19 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add users"
+        android:text="Add Users"
         android:textStyle="bold"
-        android:textAllCaps="true"
         android:textSize="40sp"
         android:paddingTop="50dp"
-        android:paddingBottom="20dp"/>
+        android:paddingBottom="20dp"
+        android:fontFamily="sans-serif"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Temporary access"
         android:textStyle="bold"
-        android:onClick=""
+        android:onClick="tempAccess"
         />
 
     <Button
@@ -86,7 +86,7 @@
         android:textAllCaps="true"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:onClick=""/>
+        android:onClick="adminaccess"/>
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>
 

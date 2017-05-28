@@ -17,55 +17,25 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add temporary user"
-        android:textAllCaps="true"
+        android:text="Add Temporary User"
         android:textSize="35dp"
-        android:paddingBottom="30dp"
-        />
+        android:paddingBottom="30dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Add Username"
-        android:ems="10"/>
-
-
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <Button
-        android:id="@+id/starttime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="start time"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:onClick="starttime"
-        />
-    <Button
-        android:id="@+id/endtime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="End time"
-        android:onClick="endtime"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        />
-</LinearLayout>
+        android:ems="10"
+        android:id="@+id/temp_user"/>
 
     <Button
         android:id="@+id/tempuseradd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="submit"
+        android:text="next"
         android:layout_marginTop="100dp"
         android:textStyle="bold"
-        android:onClick="tempuseradd"/>
+        android:onClick="tempUserAdd"/>
 
 </LinearLayout>
 </android.support.constraint.ConstraintLayout>

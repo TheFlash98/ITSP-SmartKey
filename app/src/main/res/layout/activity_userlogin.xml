@@ -29,7 +29,7 @@
         android:layout_height="50sp"
         android:text="Open"
         android:textStyle="bold"
-        android:onClick="lock"/>
+        android:onClick="openlock"/>
 
     <Button
         android:id="@+id/close"
@@ -37,7 +37,7 @@
         android:layout_height="50sp"
         android:text="CLose"
         android:textStyle="bold"
-        android:onClick="lock"
+        android:onClick="closelock"
         android:layout_marginTop="20dp"/>
 
 

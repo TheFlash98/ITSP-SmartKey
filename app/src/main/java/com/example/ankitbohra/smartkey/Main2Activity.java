@@ -17,17 +17,28 @@ import java.util.Calendar;
 public class Main2Activity extends AppCompatActivity implements
         View.OnClickListener {
 
-    Button btnDatePicker, btnTimePicker;
+    Button btnDatePicker, btnTimePicker, next;
     EditText txtDate, txtTime;
     private int mYear, mMonth, mDay, mHour, mMinute;
+    String startyear, startmonth, startday, starthour, startminute;
+    int i = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle bundle = getIntent().getExtras();
+        startyear = bundle.getString("start-year");
+        startmonth = bundle.getString("start-month");
+        startday=bundle.getString("start-day");
+        starthour=bundle.getString("start-hour");
+        startminute=bundle.getString("start-minute");
+
+
         btnDatePicker=(Button)findViewById(R.id.btn_date);
         btnTimePicker=(Button)findViewById(R.id.btn_time);
+        next = (Button)findViewById(R.id.add);
         txtDate=(EditText)findViewById(R.id.in_date);
         txtTime=(EditText)findViewById(R.id.in_time);
 
@@ -42,6 +53,7 @@ public class Main2Activity extends AppCompatActivity implements
         if (v == btnDatePicker) {
 
             // Get Current Date
+            i++;
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
@@ -64,6 +76,7 @@ public class Main2Activity extends AppCompatActivity implements
         if (v == btnTimePicker) {
 
             // Get Current Time
+            i++;
             final Calendar c = Calendar.getInstance();
             mHour = c.get(Calendar.HOUR_OF_DAY);
             mMinute = c.get(Calendar.MINUTE);
@@ -81,5 +94,14 @@ public class Main2Activity extends AppCompatActivity implements
                     }, mHour, mMinute, false);
             timePickerDialog.show();
         }
+        if(v == next){
+            if(i>=2){
+                String json = "{"
+                        +
+            }
+
+        }
     }
+
+
 }

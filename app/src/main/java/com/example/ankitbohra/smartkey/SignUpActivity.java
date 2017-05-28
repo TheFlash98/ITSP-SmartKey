@@ -1,6 +1,8 @@
 package com.example.ankitbohra.smartkey;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MediaType;
@@ -53,15 +56,10 @@ public class SignUpActivity extends AppCompatActivity {
 
         String string = enterName.getText().toString();
 
-        if (!checkUniqueness(string)) {
-            warning.setText("Choose a different username");
-            return;
-        }
         final String user_name = enterName.getText().toString();
         String pass = password.getText().toString();
         String conf_pass = confirm_password.getText().toString();
         if (pass.equals(conf_pass)){
-            warning.setText("Successful!");
             RequestBody body = RequestBody.create(JSON, jsonMaker(user_name,pass));
             Request request = new com.squareup.okhttp.Request.Builder()
                     .url(signUpUrl)
@@ -78,9 +76,48 @@ public class SignUpActivity extends AppCompatActivity {
                 public void onResponse(com.squareup.okhttp.Response response) throws IOException {
                     if (!response.isSuccessful())
                         throw new IOException("Unexpected code " + response);
-                    if(response.code()==200) {
-                        Log.d("Random","Here");
-                        makeAdmin(user_name);
+                    try {
+                        //JSONObject object = (JSONObject) new JSONTokener(response.body().string()).nextValue();
+                        //String query = object.getString("results");
+                        if(response.code()==200){
+                            Log.d("Random","Bingo!");
+                        }
+                        String query ="";
+                        JSONObject jsonRootObject = new JSONObject(response.body().string());
+                        JSONArray jsonArray = jsonRootObject.optJSONArray("results");
+                        for(int i=0; i < jsonArray.length(); i++){
+                            JSONObject jsonObject = jsonArray.getJSONObject(i);
+                            query = jsonObject.optString("param").toString();
+                        }
+                        Log.d("Random","DoneTillHere");
+                        //String s = (String)reader.nextValue();
+                        Log.d("Random",query);
+                        if(query.equals("Choose a different username")){
+                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignUpActivity.this);
+                            alertDialogBuilder.setMessage("Username already taken.");
+                            alertDialogBuilder.setPositiveButton("Okay",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface arg0, int arg1) {
+                                            Toast.makeText(SignUpActivity.this,"Try Again!",Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+                            AlertDialog alertDialog = alertDialogBuilder.create();
+                            alertDialog.show();
+                        }
+                        else{
+                            Intent intent = new Intent(SignUpActivity.this,SMARTKEYitsp.class);
+                            intent.putExtra("username",user_name);
+                            startActivity(intent);
+                        }
+
+                        //JSONObject sys = reader.getJSONObject("results");
+                        //String parameters = sys.getString("parameters");
+                        //Log.d("Random",parameters);
+                    }
+                    catch (org.json.JSONException e){
+                        Log.d("Random",e.getMessage());
                     }
                 }
             });
@@ -88,7 +125,18 @@ public class SignUpActivity extends AppCompatActivity {
 
         }
         else {
-            warning.setText("Passwords don't match. Recheck!");
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage("Passwords Don't Match");
+            alertDialogBuilder.setPositiveButton("Okay",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Toast.makeText(SignUpActivity.this,"Try Again!",Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
 
         }
     }
@@ -178,9 +226,4 @@ public class SignUpActivity extends AppCompatActivity {
         return json;
     }
 
-
-    public boolean checkUniqueness(String s){
-        //TODO
-        return true;
-    }
 }

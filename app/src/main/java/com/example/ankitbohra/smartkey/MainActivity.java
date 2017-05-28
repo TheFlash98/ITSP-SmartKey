@@ -2,6 +2,7 @@ package com.example.ankitbohra.smartkey;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,7 +18,7 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity implements
         View.OnClickListener {
 
-    Button btnDatePicker, btnTimePicker;
+    Button btnDatePicker, btnTimePicker, next;
     EditText txtDate, txtTime;
     private int mYear, mMonth, mDay, mHour, mMinute;
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements
         btnTimePicker=(Button)findViewById(R.id.btn_time);
         txtDate=(EditText)findViewById(R.id.in_date);
         txtTime=(EditText)findViewById(R.id.in_time);
+        next = (Button)findViewById(R.id.next);
 
         btnDatePicker.setOnClickListener(this);
         btnTimePicker.setOnClickListener(this);
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements
 
                             txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
 
+
                         }
                     }, mYear, mMonth, mDay);
             datePickerDialog.show();
@@ -80,6 +83,16 @@ public class MainActivity extends AppCompatActivity implements
                         }
                     }, mHour, mMinute, false);
             timePickerDialog.show();
+        }
+
+        if(v == next){
+            Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+            intent.putExtra("start-year",mYear);
+            intent.putExtra("start-month",mMonth);
+            intent.putExtra("start-day",mDay);
+            intent.putExtra("start-hour",mHour);
+            intent.putExtra("start-minute",mMinute);
+            startActivity(intent);
         }
     }
 }

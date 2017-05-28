@@ -1,5 +1,7 @@
 package com.example.ankitbohra.smartkey;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MediaType;
@@ -67,13 +70,7 @@ public class signin extends AppCompatActivity {
             public void onResponse(Response response) throws IOException{
                 if (!response.isSuccessful())
                     throw new IOException("Unexpected code " + response);
-                //TextView textView = (TextView)findViewById(R.id.demo);
-                //Log.d("Random",response.body().string());
-                String reply = response.body().toString();
-                //Log.d("Random",reply);
                 try {
-                    //JSONObject object = (JSONObject) new JSONTokener(response.body().string()).nextValue();
-                    //String query = object.getString("results");
                     if(response.code()==200){
                        // Log.d("Random","Bingo!");
                     }
@@ -84,24 +81,22 @@ public class signin extends AppCompatActivity {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         query = jsonObject.optString("param").toString();
                     }
-                    //Log.d("Random","DoneTillHere");
-                    //String s = (String)reader.nextValue();
-                    //Log.d("Random",query);
                     if(query.equals("Grant Access")){
                         checkRights(username);
                     }
+                    else if (query.equals("Incorrect Password")){
+                        generateDialogue("Incorrect Password");
+                    }
+                    else if(query.equals("Not a User")){
+                        generateDialogue("Invalid Username");
+                    }
 
-                    //JSONObject sys = reader.getJSONObject("results");
-                    //String parameters = sys.getString("parameters");
-                    //Log.d("Random",parameters);
-                }
+                    }
                 catch (org.json.JSONException e){
                     Log.d("Random",e.getMessage());
                 }
 
 
-                //Intent intent = new Intent(signin.this , LoggedIn.class);
-                //startActivity(intent);
             }
         });
     }
@@ -168,5 +163,20 @@ public class signin extends AppCompatActivity {
                 + "\"username\":\""+username+"\""
                 +"}";
         return json;
+    }
+
+    public void generateDialogue(String s){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(signin.this);
+        alertDialogBuilder.setMessage(s);
+        alertDialogBuilder.setPositiveButton("Okay",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Toast.makeText(signin.this,"Try Again!",Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }
