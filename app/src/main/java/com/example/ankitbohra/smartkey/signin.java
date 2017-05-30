@@ -83,6 +83,7 @@ public class signin extends AppCompatActivity {
                     }
                     if(query.equals("Grant Access")){
                         checkRights(username);
+                        Log.d("Random",(Integer.toString(R.string.url)));
                     }
                     else if (query.equals("Incorrect Password")){
                         generateDialogue("Incorrect Password");

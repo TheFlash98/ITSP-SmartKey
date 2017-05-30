@@ -26,14 +26,14 @@ import java.io.IOException;
 
 public class addadmin extends AppCompatActivity {
     String username = "";
-    private static final String operateLockUrl = R.string.url+"operatelock";
-    private static final String tempUserAccessUrl = R.string.url+"tempaccess";
-    private static final String addAdminUrl = R.string.url+"makeadmin";
-    private static final String removeAdminUrl = R.string.url+"removeadmin";
+    private static final String operateLockUrl = "http://192.168.0.9:5000/operatelock";
+    private static final String tempUserAccessUrl = "http://192.168.0.9:5000/tempaccess";
+    private static final String addAdminUrl = "http://192.168.0.9:5000/makeadmin";
+    private static final String removeAdminUrl = "http://192.168.0.9:5000/removeadmin";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     String ssid = "";
-
+    String query = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +43,8 @@ public class addadmin extends AppCompatActivity {
     public void insertadmin(View view){
         EditText editText = (EditText)findViewById(R.id.addadmin);
         String user_name = editText.getText().toString();
-
+        Log.d("Random",user_name);
+        query = "";
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo;
 
@@ -72,27 +73,55 @@ public class addadmin extends AppCompatActivity {
                     if(response.code()==200){
                         Log.d("Random","Bingo!");
                     }
-                    String query ="";
+                    //String query ="";
                     JSONObject jsonRootObject = new JSONObject(response.body().string());
                     JSONArray jsonArray = jsonRootObject.optJSONArray("results");
                     for(int i=0; i < jsonArray.length(); i++){
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         query = jsonObject.optString("param").toString();
+                        Log.d("Random",query);
                     }
-                    if(query.equals("User Not Found")){
-                        generateDialog("User Doesn't Exist","Recheck the username entered");
-                    }
-                    else if(query.equals("Already Admin")){
-                        generateDialog("This User is already an Admin of this lock","Recheck the username entered");
 
-                    }
                 }
                 catch (org.json.JSONException e){
                     Log.d("Random",e.getMessage());
+                    Log.d("Random",query);
                 }
+
             }
         });
+        Log.d("Random",query);
+        if(query.equals("User Not Found")){
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(addadmin.this);
+            alertDialogBuilder.setMessage("User not found.");
+            alertDialogBuilder.setPositiveButton("Okay",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Toast.makeText(addadmin.this,"Recheck the username entered",Toast.LENGTH_LONG).show();
+                        }
+                    });
 
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+        else if(query.equals("Already Admin")){
+            //generateDialog("This User is already an Admin of this lock","Recheck the username entered");
+            //Toast.makeText(addadmin.this,"Recheck the username entered",Toast.LENGTH_LONG).show();
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(addadmin.this);
+            alertDialogBuilder.setMessage("This User is already an Admin of this lock");
+            alertDialogBuilder.setPositiveButton("Okay",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Toast.makeText(addadmin.this,"Recheck the username entered",Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+
+        }
 
 
     }
@@ -153,10 +182,10 @@ public class addadmin extends AppCompatActivity {
 
     public String jsonMaker(String username, String ssid){
         String json = "{"
-                + "\"username\""+username+"\","
+                + "\"username\":\""+username+"\","
                 + "\"ssid\":"+ssid
                 + "}";
-
+        Log.d("Random",json);
         return json;
     }
 

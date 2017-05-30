@@ -3,7 +3,6 @@ package com.example.ankitbohra.smartkey;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -80,9 +79,9 @@ public class userlogin extends AppCompatActivity {
                         query = jsonObject.optString("param").toString();
                     }
                     if(query.equals("Operate Lock")){
-                        generateDialog("Operated Lock Successfully","Lock is Open");
+                        generateDialog("Operated Lock Successfully","Lock is open");
                     }
-                    else if(query.equals("You cannot operate the lock")){
+                    else if(query.equals("Invalid Username/SSID")){
                         generateDialog("You don't have the access rights to this lock","Contact the Admin");
                     }
 

@@ -59,6 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
         final String user_name = enterName.getText().toString();
         String pass = password.getText().toString();
         String conf_pass = confirm_password.getText().toString();
+        Log.d("Random",jsonMaker(user_name,pass));
         if (pass.equals(conf_pass)){
             RequestBody body = RequestBody.create(JSON, jsonMaker(user_name,pass));
             Request request = new com.squareup.okhttp.Request.Builder()

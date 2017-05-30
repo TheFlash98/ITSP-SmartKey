@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Callback;
@@ -27,10 +26,10 @@ import java.io.IOException;
 
 public class LoggedIn extends AppCompatActivity {
     String username = "";
-    private static final String operateLockUrl = R.string.url+"operatelock";
-    private static final String tempUserAccessUrl = R.string.url+"tempaccess";
-    private static final String addAdminUrl = R.string.url+"makeadmin";
-    private static final String removeAdminUrl = R.string.url+"removeadmin";
+    private static final String operateLockUrl = "http://192.168.0.9:5000/operatelock";
+    private static final String tempUserAccessUrl = "http://192.168.0.9:5000/tempaccess";
+    private static final String addAdminUrl = "http://192.168.0.9:5000/makeadmin";
+    private static final String removeAdminUrl = "http://192.168.0.9:5000/removeadmin";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     String ssid = "";
