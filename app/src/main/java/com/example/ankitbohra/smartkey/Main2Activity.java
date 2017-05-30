@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MediaType;
@@ -30,6 +31,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Calendar;
+
+import static android.R.attr.action;
 
 public class Main2Activity extends AppCompatActivity implements
         View.OnClickListener {
@@ -204,7 +207,7 @@ public class Main2Activity extends AppCompatActivity implements
 
                             }
                             else if (query.equals("The end time is from the past.")){
-                                /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Main2Activity.this);
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Main2Activity.this);
                                 alertDialogBuilder.setMessage("The end time is from the past.");
                                 alertDialogBuilder.setPositiveButton("Okay",
                                         new DialogInterface.OnClickListener() {
@@ -215,7 +218,7 @@ public class Main2Activity extends AppCompatActivity implements
                                         });
 
                                 AlertDialog alertDialog = alertDialogBuilder.create();
-                                alertDialog.show();*/
+                                alertDialog.show();
                             }
 
                             //JSONObject sys = reader.getJSONObject("results");
