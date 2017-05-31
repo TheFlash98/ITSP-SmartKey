@@ -28,12 +28,15 @@ public class userlogin extends AppCompatActivity {
     private static final String operateLockUrl = "http://192.168.0.9:5000/operatelock";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
+    int i,j=0;
+    userlogin obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_userlogin);
+
+        obj = userlogin.this;
 
         Bundle bundle = getIntent().getExtras();
         String user_name = bundle.getString("username");
@@ -79,10 +82,20 @@ public class userlogin extends AppCompatActivity {
                         query = jsonObject.optString("param").toString();
                     }
                     if(query.equals("Operate Lock")){
-                        generateDialog("Operated Lock Successfully","Lock is open");
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateDialog("Operated Lock Successfully","Lock is open");
+                            }
+                        });
                     }
                     else if(query.equals("Invalid Username/SSID")){
-                        generateDialog("You don't have the access rights to this lock","Contact the Admin");
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateDialog("You don't have the access rights to this lock","Contact the Admin");
+                            }
+                        });
                     }
 
                 }
@@ -131,7 +144,20 @@ public class userlogin extends AppCompatActivity {
                         query = jsonObject.optString("param").toString();
                     }
                     if(query.equals("Operate Lock")){
-                        generateDialog("Lock Operated Successfully","Lock is Closed");
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateDialog("Lock Operated Successfully","Lock is Closed");
+                            }
+                        });
+                        }
+                    else if(query.equals("Invalid Username/SSID")){
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateDialog("You don't have the access rights to this lock","Contact the Admin");
+                            }
+                        });
                     }
 
                 }

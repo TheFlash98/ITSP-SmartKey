@@ -66,7 +66,8 @@
         android:id="@+id/button2"
         android:layout_alignParentBottom="true"
         android:layout_toRightOf="@+id/textview"
-        android:layout_toEndOf="@+id/textview" />
+        android:layout_toEndOf="@+id/textview"
+        android:onClick="cancel"/>
 
 
 </RelativeLayout>

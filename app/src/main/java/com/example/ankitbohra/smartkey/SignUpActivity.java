@@ -8,6 +8,8 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -29,6 +31,7 @@ import java.io.IOException;
 
 
 public class SignUpActivity extends AppCompatActivity {
+    SignUpActivity obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,19 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        obj = SignUpActivity.this;
     }
 
+    public static Handler UIHandler;
+
+    static {
+        UIHandler = new Handler(Looper.getMainLooper());
+    }
+
+    public static void runOnUI(Runnable runnable) {
+        UIHandler.post(runnable);
+    }
 
 
     private static final String signUpUrl = "http://192.168.0.9:5000/signup";
@@ -45,7 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public void action(View view)throws IOException {
+    public void action(View view) throws IOException {
         EditText enterName = (EditText) findViewById(R.id.name);
 
         EditText password = (EditText) findViewById(R.id.password);
@@ -59,9 +73,9 @@ public class SignUpActivity extends AppCompatActivity {
         final String user_name = enterName.getText().toString();
         String pass = password.getText().toString();
         String conf_pass = confirm_password.getText().toString();
-        Log.d("Random",jsonMaker(user_name,pass));
-        if (pass.equals(conf_pass)){
-            RequestBody body = RequestBody.create(JSON, jsonMaker(user_name,pass));
+        Log.d("Random", jsonMaker(user_name, pass));
+        if (pass.equals(conf_pass)) {
+            RequestBody body = RequestBody.create(JSON, jsonMaker(user_name, pass));
             Request request = new com.squareup.okhttp.Request.Builder()
                     .url(signUpUrl)
                     .post(body)
@@ -80,59 +94,74 @@ public class SignUpActivity extends AppCompatActivity {
                     try {
                         //JSONObject object = (JSONObject) new JSONTokener(response.body().string()).nextValue();
                         //String query = object.getString("results");
-                        if(response.code()==200){
-                            Log.d("Random","Bingo!");
+                        if (response.code() == 200) {
+                            Log.d("Random", "Bingo!");
                         }
-                        String query ="";
+                        String query = "";
                         JSONObject jsonRootObject = new JSONObject(response.body().string());
                         JSONArray jsonArray = jsonRootObject.optJSONArray("results");
-                        for(int i=0; i < jsonArray.length(); i++){
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             query = jsonObject.optString("param").toString();
                         }
-                        Log.d("Random","DoneTillHere");
+                        Log.d("Random", "DoneTillHere");
                         //String s = (String)reader.nextValue();
-                        Log.d("Random",query);
-                        if(query.equals("Choose a different username")){
-                            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignUpActivity.this);
-                            alertDialogBuilder.setMessage("Username already taken.");
-                            alertDialogBuilder.setPositiveButton("Okay",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface arg0, int arg1) {
-                                            Toast.makeText(SignUpActivity.this,"Try Again!",Toast.LENGTH_LONG).show();
-                                        }
-                                    });
+                        Log.d("Random", query);
+                        if (query.equals("Choose a different username")) {
+                            obj.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignUpActivity.this);
+                                    alertDialogBuilder.setMessage("Username already taken.");
+                                    alertDialogBuilder.setPositiveButton("Okay",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface arg0, int arg1) {
+                                                    Toast.makeText(SignUpActivity.this, "Try Again!", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
 
-                            AlertDialog alertDialog = alertDialogBuilder.create();
-                            alertDialog.show();
-                        }
-                        else{
-                            Intent intent = new Intent(SignUpActivity.this,SMARTKEYitsp.class);
-                            intent.putExtra("username",user_name);
-                            startActivity(intent);
+                                    AlertDialog alertDialog = alertDialogBuilder.create();
+                                    alertDialog.show();
+                                }
+                            });
+
+                        } else {
+                            obj.runOnUiThread(new Runnable() {
+                                public void run() {
+                                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SignUpActivity.this);
+                                    alertDialogBuilder.setMessage("Successful!");
+                                    alertDialogBuilder.setPositiveButton("Okay",
+                                            new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface arg0, int arg1) {
+                                                    Intent intent = new Intent(SignUpActivity.this, SMARTKEYitsp.class);
+                                                    intent.putExtra("username", user_name);
+                                                    startActivity(intent);
+                                                }
+                                            });
+
+                                    AlertDialog alertDialog = alertDialogBuilder.create();
+                                    alertDialog.show();
+                                }
+                            });
                         }
 
-                        //JSONObject sys = reader.getJSONObject("results");
-                        //String parameters = sys.getString("parameters");
-                        //Log.d("Random",parameters);
                     }
-                    catch (org.json.JSONException e){
-                        Log.d("Random",e.getMessage());
+                    catch (org.json.JSONException e) {
+                        Log.d("Random", e.getMessage());
                     }
                 }
             });
 
 
-        }
-        else {
+        } else {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setMessage("Passwords Don't Match");
             alertDialogBuilder.setPositiveButton("Okay",
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
-                            Toast.makeText(SignUpActivity.this,"Try Again!",Toast.LENGTH_LONG).show();
+                            Toast.makeText(SignUpActivity.this, "Try Again!", Toast.LENGTH_LONG).show();
                         }
                     });
 
@@ -142,16 +171,16 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    public String jsonMaker(String username, String password){
+    public String jsonMaker(String username, String password) {
         String json = "{"
-                + "\"username\":\""+username+"\","
-                + "\"password\":\""+password+"\""
+                + "\"username\":\"" + username + "\","
+                + "\"password\":\"" + password + "\""
                 + "}";
 
         return json;
     }
 
-    public void makeAdmin(final String username){
+    public void makeAdmin(final String username) {
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo;
         String ssid = "";
@@ -159,8 +188,8 @@ public class SignUpActivity extends AppCompatActivity {
         if (wifiInfo.getSupplicantState() == SupplicantState.COMPLETED) {
             ssid = wifiInfo.getSSID();
         }
-        String json = jsonMaker2(username,ssid);
-        Log.d("Random",json);
+        String json = jsonMaker2(username, ssid);
+        Log.d("Random", json);
         RequestBody body = RequestBody.create(JSON, json);
         final Request request = new com.squareup.okhttp.Request.Builder()
                 .url(makeAdminUrl)
@@ -182,49 +211,46 @@ public class SignUpActivity extends AppCompatActivity {
                 try {
                     //JSONObject object = (JSONObject) new JSONTokener(response.body().string()).nextValue();
                     //String query = object.getString("results");
-                    if(response.code()==200){
-                        Log.d("Random","Bingo!");
+                    if (response.code() == 200) {
+                        Log.d("Random", "Bingo!");
                     }
-                    String query ="";
+                    String query = "";
                     JSONObject jsonRootObject = new JSONObject(response.body().string());
                     JSONArray jsonArray = jsonRootObject.optJSONArray("results");
-                    for(int i=0; i < jsonArray.length(); i++){
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         query = jsonObject.optString("param").toString();
                     }
-                    Log.d("Random","DoneTillHere");
+                    Log.d("Random", "DoneTillHere");
                     //String s = (String)reader.nextValue();
-                    Log.d("Random",query);
-                    if(query.equals("No New")){
-                        Intent intent = new Intent(SignUpActivity.this,userlogin.class);
-                        intent.putExtra("username",username);
+                    Log.d("Random", query);
+                    if (query.equals("No New")) {
+                        Intent intent = new Intent(SignUpActivity.this, userlogin.class);
+                        intent.putExtra("username", username);
                         startActivity(intent);
-                    }
-                    else if (query.equals("New Admin")){
-                        Intent intent = new Intent(SignUpActivity.this,LoggedIn.class);
-                        intent.putExtra("username",username);
+                    } else if (query.equals("New Admin")) {
+                        Intent intent = new Intent(SignUpActivity.this, LoggedIn.class);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                     }
 
                     //JSONObject sys = reader.getJSONObject("results");
                     //String parameters = sys.getString("parameters");
                     //Log.d("Random",parameters);
-                }
-                catch (org.json.JSONException e){
-                    Log.d("Random",e.getMessage());
+                } catch (org.json.JSONException e) {
+                    Log.d("Random", e.getMessage());
                 }
             }
         });
 
     }
 
-    public String jsonMaker2(String username, String ssid){
+    public String jsonMaker2(String username, String ssid) {
         String json = "{"
-                + "\"username\":\""+username+"\","
-                + "\"ssid\":"+ssid
+                + "\"username\":\"" + username + "\","
+                + "\"ssid\":" + ssid
                 + "}";
 
         return json;
     }
-
 }

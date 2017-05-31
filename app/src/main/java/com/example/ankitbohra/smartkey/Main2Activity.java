@@ -9,8 +9,6 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -32,8 +30,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Calendar;
 
-import static android.R.attr.action;
-
 public class Main2Activity extends AppCompatActivity implements
         View.OnClickListener {
 
@@ -48,13 +44,15 @@ public class Main2Activity extends AppCompatActivity implements
     private static final String tempAccessUrl = "http://192.168.0.9:5000/tempaccess";
     int i = 0;
 
-    android.os.Handler mhandler;
+    Main2Activity obj;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        obj = Main2Activity.this;
 
         Bundle bundle = getIntent().getExtras();
         username = bundle.getString("username");
@@ -174,8 +172,6 @@ public class Main2Activity extends AppCompatActivity implements
                         if (!response.isSuccessful())
                             throw new IOException("Unexpected code " + response);
                         try {
-                            //JSONObject object = (JSONObject) new JSONTokener(response.body().string()).nextValue();
-                            //String query = object.getString("results");
                             if(response.code()==200){
                                 Log.d("Random","Bingo!");
                             }
@@ -187,94 +183,70 @@ public class Main2Activity extends AppCompatActivity implements
                                 query = jsonObject.optString("param").toString();
                             }
                             Log.d("Random","DoneTillHere");
-                            //String s = (String)reader.nextValue();
                             Log.d("Random",query);
                             if(query.equals("Invalid Username")){
-                                /*AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Main2Activity.this);
-                                alertDialogBuilder.setMessage("Username is invalid");
-                                alertDialogBuilder.setPositiveButton("Okay",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface arg0, int arg1) {
-                                                Toast.makeText(Main2Activity.this,"Try Again!"+action,Toast.LENGTH_LONG).show();
-                                            }
-                                        });
+                                obj.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Main2Activity.this);
+                                        alertDialogBuilder.setMessage("Username is invalid");
+                                        alertDialogBuilder.setPositiveButton("Okay",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface arg0, int arg1) {
+                                                        Toast.makeText(Main2Activity.this,"Try Again!",Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
 
-                                AlertDialog alertDialog = alertDialogBuilder.create();
-                                alertDialog.show();*/
+                                        AlertDialog alertDialog = alertDialogBuilder.create();
+                                        alertDialog.show();
+                                    }
+                                });
+
                             }
                             else if(query.equals("Invalid Time Span!")){
+                                obj.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Main2Activity.this);
+                                        alertDialogBuilder.setMessage("Invalid Time Span!");
+                                        alertDialogBuilder.setPositiveButton("Okay",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface arg0, int arg1) {
+                                                        Toast.makeText(Main2Activity.this,"Try Again!",Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
 
+                                        AlertDialog alertDialog = alertDialogBuilder.create();
+                                        alertDialog.show();
+                                    }
+                                });
                             }
                             else if (query.equals("The end time is from the past.")){
-                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Main2Activity.this);
-                                alertDialogBuilder.setMessage("The end time is from the past.");
-                                alertDialogBuilder.setPositiveButton("Okay",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface arg0, int arg1) {
-                                                Toast.makeText(Main2Activity.this,"Try Again!"+action,Toast.LENGTH_LONG).show();
-                                            }
-                                        });
+                                obj.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Main2Activity.this);
+                                        alertDialogBuilder.setMessage("The end time is from the past.");
+                                        alertDialogBuilder.setPositiveButton("Okay",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface arg0, int arg1) {
+                                                        Toast.makeText(Main2Activity.this,"Try Again!",Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
 
-                                AlertDialog alertDialog = alertDialogBuilder.create();
-                                alertDialog.show();
+                                        AlertDialog alertDialog = alertDialogBuilder.create();
+                                        alertDialog.show();
+                                    }
+                                });
+
                             }
-
-                            //JSONObject sys = reader.getJSONObject("results");
-                            //String parameters = sys.getString("parameters");
-                            //Log.d("Random",parameters);
                         }
                         catch (org.json.JSONException e){
                             Log.d("Random",e.getMessage());
                         }
-                        Handler handler = new Handler() {
-                            @Override
-                            public void handleMessage(Message msg) {
-
-                                int serverResponseCode = response.code();
-                                switch (serverResponseCode)
-                                {
-                                    case 200:
-                                    {
-                                        AlertDialog alertDialog;
-                                        alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
-                                        alertDialog.setTitle("Super :)");
-                                        alertDialog.setMessage("Poza a fost trimisa cu success.");
-                                        alertDialog.setButton("Ok", new DialogInterface.OnClickListener() {
-
-                                            public void onClick(DialogInterface dialog, int id) {
-
-                                                finish();
-
-                                            } });
-                                        alertDialog.show();
-                                        serverResponseCode = -1;
-
-                                        break;
-                                    }
-                                    default:
-                                    {
-                                        AlertDialog alertDialog;
-                                        alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
-                                        alertDialog.setTitle("Eroare :(");
-                                        alertDialog.setMessage("Eroare la trimiterea pozei.");
-                                        alertDialog.setButton("Ok", new DialogInterface.OnClickListener() {
-
-                                            public void onClick(DialogInterface dialog, int id) {
-
-                                                finish();
-
-                                            } });
-                                        alertDialog.show();
-
-                                        break;
-                                    }
-                                }
-
-
-                            }
-                        };
 
                     }
                 });

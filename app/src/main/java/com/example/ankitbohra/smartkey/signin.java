@@ -8,9 +8,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Callback;
@@ -26,15 +24,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class signin extends AppCompatActivity {
-    Button b1,b2;
-    EditText ed1,ed2;
-
-    TextView tx1;
 
     private static final String url = "http://192.168.0.9:5000/login";
     private static final String checkRightsUrl = "http://192.168.0.9:5000/checkrights";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+    signin obj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +37,8 @@ public class signin extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        obj = signin.this;
     }
 
 
@@ -83,13 +80,25 @@ public class signin extends AppCompatActivity {
                     }
                     if(query.equals("Grant Access")){
                         checkRights(username);
-                        Log.d("Random",(Integer.toString(R.string.url)));
+                        //Log.d("Random",(Integer.toString(R.string.url)));
                     }
                     else if (query.equals("Incorrect Password")){
-                        generateDialogue("Incorrect Password");
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateDialogue("Incorrect Password");
+                            }
+                        });
+
                     }
                     else if(query.equals("Not a User")){
-                        generateDialogue("Invalid Username");
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateDialogue("Invalid Username");
+                            }
+                        });
+
                     }
 
                     }
@@ -157,6 +166,11 @@ public class signin extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void cancel(View view){
+        Intent intent = new Intent(signin.this, SMARTKEYitsp.class);
+        startActivity(intent);
     }
 
     public String jsonMaker2(String username){

@@ -25,14 +25,18 @@ public class addtemp extends AppCompatActivity {
     private static final String validUserUrl = "http://192.168.0.9:5000/validuser";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+    addtemp obj;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addtemp);
+
+        obj = addtemp.this;
     }
 
     public void tempUserAdd(View view){
-        EditText editText = (EditText) findViewById(R.id.temp_user);
+        final EditText editText = (EditText) findViewById(R.id.temp_user);
         final String user_name = editText.getText().toString();
         RequestBody body = RequestBody.create(JSON, jsonMaker(user_name));
         Request request = new com.squareup.okhttp.Request.Builder()
@@ -64,18 +68,25 @@ public class addtemp extends AppCompatActivity {
                     Log.d("Random","DoneTillHere");
                     Log.d("Random",query);
                     if(query.equals("Not Ok")){
-                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(addtemp.this);
-                        alertDialogBuilder.setMessage("Username Not Found");
-                        alertDialogBuilder.setPositiveButton("Okay",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface arg0, int arg1) {
-                                        Toast.makeText(addtemp.this,"Try Again!",Toast.LENGTH_LONG).show();
-                                    }
-                                });
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(addtemp.this);
+                                alertDialogBuilder.setMessage("Username Not Found");
+                                alertDialogBuilder.setPositiveButton("Okay",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface arg0, int arg1) {
+                                                Toast.makeText(addtemp.this,"Try Again!",Toast.LENGTH_LONG).show();
+                                                editText.setText("");
+                                            }
+                                        });
 
-                        AlertDialog alertDialog = alertDialogBuilder.create();
-                        alertDialog.show();
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
+                            }
+                        });
+
                     }
                     else if(query.equals("OK")){
                         Intent intent = new Intent(addtemp.this,MainActivity.class);

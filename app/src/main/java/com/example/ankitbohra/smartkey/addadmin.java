@@ -33,18 +33,21 @@ public class addadmin extends AppCompatActivity {
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     String ssid = "";
-    String query = "";
+    //String query = "";
+    addadmin obj;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addadmin);
+
+        obj = addadmin.this;
     }
 
     public void insertadmin(View view){
-        EditText editText = (EditText)findViewById(R.id.addadmin);
+        final EditText editText = (EditText)findViewById(R.id.addadmin);
         String user_name = editText.getText().toString();
         Log.d("Random",user_name);
-        query = "";
+        //query = "";
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo;
 
@@ -73,7 +76,7 @@ public class addadmin extends AppCompatActivity {
                     if(response.code()==200){
                         Log.d("Random","Bingo!");
                     }
-                    //String query ="";
+                    String query ="";
                     JSONObject jsonRootObject = new JSONObject(response.body().string());
                     JSONArray jsonArray = jsonRootObject.optJSONArray("results");
                     for(int i=0; i < jsonArray.length(); i++){
@@ -82,52 +85,54 @@ public class addadmin extends AppCompatActivity {
                         Log.d("Random",query);
                     }
 
+                    if(query.equals("User Not Found")){
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateDialog("User not found.","Try Again!");
+                            }
+                        });
+                    }
+                    else if(query.equals("Already Admin")){
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateDialog("This User is already an Admin of this lock","Try Again!");
+                            }
+                        });
+                    }
+                    else{
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(addadmin.this);
+                                alertDialogBuilder.setMessage("Added Successfully");
+                                alertDialogBuilder.setPositiveButton("Okay",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface arg0, int arg1) {
+                                               editText.setText("");
+                                            }
+                                        });
+
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
+                            }
+                        });
+                    }
+
                 }
                 catch (org.json.JSONException e){
                     Log.d("Random",e.getMessage());
-                    Log.d("Random",query);
+
                 }
 
             }
         });
-        Log.d("Random",query);
-        if(query.equals("User Not Found")){
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(addadmin.this);
-            alertDialogBuilder.setMessage("User not found.");
-            alertDialogBuilder.setPositiveButton("Okay",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            Toast.makeText(addadmin.this,"Recheck the username entered",Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-        }
-        else if(query.equals("Already Admin")){
-            //generateDialog("This User is already an Admin of this lock","Recheck the username entered");
-            //Toast.makeText(addadmin.this,"Recheck the username entered",Toast.LENGTH_LONG).show();
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(addadmin.this);
-            alertDialogBuilder.setMessage("This User is already an Admin of this lock");
-            alertDialogBuilder.setPositiveButton("Okay",
-                    new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            Toast.makeText(addadmin.this,"Recheck the username entered",Toast.LENGTH_LONG).show();
-                        }
-                    });
-
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
-
-        }
-
-
     }
 
     public void deleteadmin(View view){
-        EditText editText = (EditText)findViewById(R.id.addadmin);
+        final EditText editText = (EditText)findViewById(R.id.addadmin);
         String user_name = editText.getText().toString();
 
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -166,10 +171,39 @@ public class addadmin extends AppCompatActivity {
                         query = jsonObject.optString("param").toString();
                     }
                     if(query.equals("User Not Found")){
-                        generateDialog("User Doesn't Exist","Recheck the username entered");
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateDialog("User does not exist.","Try Again!");
+                            }
+                        });
                     }
                     else if(query.equals("Admin Not Found")){
-                        generateDialog("This User is not an Admin","Recheck the username entered");
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                generateDialog("This User is not an Admin","Try Again!");
+                            }
+                        });
+                    }
+                    else{
+                        obj.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(addadmin.this);
+                                alertDialogBuilder.setMessage("Deleted Successfully");
+                                alertDialogBuilder.setPositiveButton("Okay",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface arg0, int arg1) {
+                                                editText.setText("");
+                                            }
+                                        });
+
+                                AlertDialog alertDialog = alertDialogBuilder.create();
+                                alertDialog.show();
+                            }
+                        });
                     }
 
                 }
