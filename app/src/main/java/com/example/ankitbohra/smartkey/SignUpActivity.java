@@ -134,7 +134,7 @@ public class SignUpActivity extends AppCompatActivity {
                                             new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface arg0, int arg1) {
-                                                    Intent intent = new Intent(SignUpActivity.this, SMARTKEYitsp.class);
+                                                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                                                     intent.putExtra("username", user_name);
                                                     startActivity(intent);
                                                 }
@@ -225,11 +225,11 @@ public class SignUpActivity extends AppCompatActivity {
                     //String s = (String)reader.nextValue();
                     Log.d("Random", query);
                     if (query.equals("No New")) {
-                        Intent intent = new Intent(SignUpActivity.this, userlogin.class);
+                        Intent intent = new Intent(SignUpActivity.this, UserLoginActivity.class);
                         intent.putExtra("username", username);
                         startActivity(intent);
                     } else if (query.equals("New Admin")) {
-                        Intent intent = new Intent(SignUpActivity.this, LoggedIn.class);
+                        Intent intent = new Intent(SignUpActivity.this, AdminLoginActivity.class);
                         intent.putExtra("username", username);
                         startActivity(intent);
                     }

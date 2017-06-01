@@ -12,22 +12,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SMARTKEYitsp">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".signin" />
+        <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoggedIn" />
-        <activity android:name=".userlogin" />
-        <activity android:name=".LockOpen" />
-        <activity android:name=".addadmin" />
-        <activity android:name=".addtemp" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Main2Activity" />
+        <activity android:name=".AdminLoginActivity" />
+        <activity android:name=".UserLoginActivity" />
+        <activity android:name=".DemoActivity" />
+        <activity android:name=".AddAdminActivity" />
+        <activity android:name=".AddTempActivity" />
+        <activity android:name=".StartTimeActivity" />
+        <activity android:name=".EndTimeActivity" />
         <activity android:name=".Datepicker"></activity>
     </application>
 

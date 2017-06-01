@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
+        jar="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="933e4ffa605f17200a0f37722e6bd84b59c3f686">
+        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7da76dc8006c76ff3276f51a9e3af38d63a2e700/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
         sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
         <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_23f2da962ebf043ed498220f7d5aa485300b0d59/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.3"
-        sha1="596bace51daf8b16848e7ba802df35e44fc40d32">
-        <dex dex="/Users/Sarthak/Coding/ITSP-SmartKey/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_7da76dc8006c76ff3276f51a9e3af38d63a2e700/classes.dex" />
     </item>
 
 </items>
