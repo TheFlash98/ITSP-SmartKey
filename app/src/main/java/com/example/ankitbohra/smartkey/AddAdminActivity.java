@@ -26,14 +26,11 @@ import java.io.IOException;
 
 public class AddAdminActivity extends AppCompatActivity {
     String username = "";
-    private static final String operateLockUrl = "http://192.168.0.9:5000/operatelock";
-    private static final String tempUserAccessUrl = "http://192.168.0.9:5000/tempaccess";
     private static final String addAdminUrl = "http://192.168.0.9:5000/makeadmin";
     private static final String removeAdminUrl = "http://192.168.0.9:5000/removeadmin";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     String ssid = "";
-    //String query = "";
     AddAdminActivity obj;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +44,6 @@ public class AddAdminActivity extends AppCompatActivity {
         final EditText editText = (EditText)findViewById(R.id.addadmin);
         String user_name = editText.getText().toString();
         Log.d("Random",user_name);
-        //query = "";
         WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         WifiInfo wifiInfo;
 

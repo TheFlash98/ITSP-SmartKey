@@ -243,6 +243,25 @@ public class EndTimeActivity extends AppCompatActivity implements
                                 });
 
                             }
+                            else {
+                                obj.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(EndTimeActivity.this);
+                                        alertDialogBuilder.setMessage("Successful!");
+                                        alertDialogBuilder.setPositiveButton("Okay",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface arg0, int arg1) {
+
+                                                    }
+                                                });
+
+                                        AlertDialog alertDialog = alertDialogBuilder.create();
+                                        alertDialog.show();
+                                    }
+                                });
+                            }
                         }
                         catch (org.json.JSONException e){
                             Log.d("Random",e.getMessage());
