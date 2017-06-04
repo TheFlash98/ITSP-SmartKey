@@ -8,8 +8,6 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -43,19 +41,9 @@ public class SignUpActivity extends AppCompatActivity {
         obj = SignUpActivity.this;
     }
 
-    public static Handler UIHandler;
-
-    static {
-        UIHandler = new Handler(Looper.getMainLooper());
-    }
-
-    public static void runOnUI(Runnable runnable) {
-        UIHandler.post(runnable);
-    }
-
-
-    private static final String signUpUrl = "http://192.168.0.9:5000/signup";
-    private static final String makeAdminUrl = "http://192.168.0.9:5000/makeadmin";
+    public static final String URL = MyApp.url;
+    private static final String signUpUrl = URL+"signup";
+    private static final String makeAdminUrl = URL+"makeadmin";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 

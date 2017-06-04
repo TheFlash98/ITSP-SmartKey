@@ -25,7 +25,8 @@ import java.io.IOException;
 
 public class UserLoginActivity extends AppCompatActivity {
     String username = "";
-    private static final String operateLockUrl = "http://192.168.0.9:5000/operatelock";
+    public static final String URL = MyApp.url;
+    private static final String operateLockUrl = URL+"operatelock";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     int i,j=0;

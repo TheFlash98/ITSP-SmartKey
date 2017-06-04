@@ -22,7 +22,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class AddTempActivity extends AppCompatActivity {
-    private static final String validUserUrl = "http://192.168.0.9:5000/validuser";
+
+    public static final String URL = MyApp.url;
+    private static final String validUserUrl = URL+"validuser";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 

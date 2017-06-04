@@ -26,10 +26,11 @@ import java.io.IOException;
 
 public class AdminLoginActivity extends AppCompatActivity {
     String username = "";
-    private static final String operateLockUrl = "http://192.168.0.9:5000/operatelock";
-    private static final String tempUserAccessUrl = "http://192.168.0.9:5000/tempaccess";
-    private static final String addAdminUrl = "http://192.168.0.9:5000/makeadmin";
-    private static final String removeAdminUrl = "http://192.168.0.9:5000/removeadmin";
+    public static final String URL = MyApp.url;
+    private static final String operateLockUrl = URL+"operatelock";
+    private static final String tempUserAccessUrl = URL+"tempaccess";
+    private static final String addAdminUrl = URL+"makeadmin";
+    private static final String removeAdminUrl = URL+"removeadmin";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     String ssid = "";

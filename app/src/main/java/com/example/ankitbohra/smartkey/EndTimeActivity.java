@@ -40,8 +40,9 @@ public class EndTimeActivity extends AppCompatActivity implements
     int startyear, startmonth, startday, starthour, startminute ;
     String username;
     private final OkHttpClient client = new OkHttpClient();
+    public static final String URL = MyApp.url;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    private static final String tempAccessUrl = "http://192.168.0.9:5000/tempaccess";
+    private static final String tempAccessUrl = URL+"tempaccess";
     int i = 0;
 
     EndTimeActivity obj;

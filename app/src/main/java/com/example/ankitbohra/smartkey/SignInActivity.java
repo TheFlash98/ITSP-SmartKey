@@ -25,8 +25,9 @@ import java.io.IOException;
 
 public class SignInActivity extends AppCompatActivity {
 
-    private static final String url = "http://192.168.0.9:5000/login";
-    private static final String checkRightsUrl = "http://192.168.0.9:5000/checkrights";
+    public static final String URL = MyApp.url;
+    private static final String url = URL+"login";
+    private static final String checkRightsUrl = URL+"checkrights";
     private final OkHttpClient client = new OkHttpClient();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     SignInActivity obj;
