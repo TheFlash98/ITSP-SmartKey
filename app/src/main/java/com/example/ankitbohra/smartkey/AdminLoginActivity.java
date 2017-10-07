@@ -58,6 +58,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         if (wifiInfo.getSupplicantState() == SupplicantState.COMPLETED) {
             ssid = wifiInfo.getSSID();
         }
+
         String json = jsonMaker(username, ssid,"open");
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new com.squareup.okhttp.Request.Builder()
@@ -87,26 +88,8 @@ public class AdminLoginActivity extends AppCompatActivity {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         query = jsonObject.optString("param").toString();
                     }
-                    if(i==1){
-                        obj.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AdminLoginActivity.this);
-                                alertDialogBuilder.setMessage("The lock is already open.");
-                                alertDialogBuilder.setPositiveButton("Okay",
-                                        new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface arg0, int arg1) {
-                                                return;
-                                            }
-                                        });
 
-                                AlertDialog alertDialog = alertDialogBuilder.create();
-                                alertDialog.show();
-                            }
-                        });
-                    }
-                    else if(query.equals("Operate Lock")){
+                    if(query.equals("Operate Lock")){
                         i = 1;
                         j = 0;
                         obj.runOnUiThread(new Runnable() {
